@@ -1,7 +1,8 @@
 require("dotenv").config();
 var keys = require("./keys.js");
-var Spotify = require('node-spotify-api')
+var Spotify = require('node-spotify-api');
 var spotify = new Spotify(keys.spotify);
+var moment = require('moment');
 
 //takes in command line arguement
 var userSelect = process.argv[2];
@@ -32,18 +33,19 @@ function movieInfo(userSearch) {
             })
     }
 }
-
-function concertInfo(userSearch){
+//Function for BandinTown
+function concertInfo(userSearch) {
     axios.get(`https://rest.bandsintown.com/artists/${userSearch}/events?app_id=codingbootcamp`)
-    .then(function (response){
-
-        for(let i = 0; i < response.data.length; i++) {
-        console.log(`Venue Name: ${response.data[i].venue.name}`)
-        console.log(`Location: ${response.data[i].venue.city}, ${response.data[i].venue.country}`)
-        console.log('Event Date: ' + moment(response.data[i].venue.date).format("L"))
-
-        }
-    })
+        .then(function (response) {
+            //Loop to display all search results
+            for (let i = 0; i < response.data.length; i++) {
+                console.log('--------------------')
+                console.log('')
+                console.log(`Name of Venue: ${response.data[i].venue.name}`)
+                console.log(`Venue Location: ${response.data[i].venue.city}, ${response.data[i].venue.country}`)
+                console.log(`Date of the Event: ${moment(response.data[i].datetime).format("L")}`)
+            }
+        })
 }
 
 //Function for Spotify
@@ -53,7 +55,6 @@ function songInfo() {
             console.log('Error occurred: ' + err);
             return;
         }
-
         // Do something with 'data'
         var songs = data.tracks.items;
         for (var i = 0; i < songs.length; i++) {
@@ -67,8 +68,7 @@ function songInfo() {
         }
     });
 }
-
-//Function to run userInput
+//Function to run userInput when enter specific userSelect
 function userInput(userSelect, userSearch) {
     if (userSelect === "movie-this") {
         movieInfo(userSearch);
@@ -78,7 +78,7 @@ function userInput(userSelect, userSearch) {
         songInfo(userSearch);
     }
 };
-
+//Call Userinput 
 userInput(userSelect, userSearch)
 
 
