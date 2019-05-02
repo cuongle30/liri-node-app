@@ -1,8 +1,10 @@
+//Var for required apps
 require("dotenv").config();
 var keys = require("./keys.js");
 var Spotify = require('node-spotify-api');
 var spotify = new Spotify(keys.spotify);
 var moment = require('moment');
+var fs = require('fs');
 
 //takes in command line arguement
 var userSelect = process.argv[2];
@@ -13,13 +15,14 @@ var axios = require('axios');
 
 //Run a request with axios to the OMDB API with the movie specified
 function movieInfo(userSearch) {
+    //If user does not enter any info
     if (userSearch === undefined) {
         userSearch = "Mr. Nobody"
         console.log('--------------------')
         console.log('')
         console.log(`If you haven't watched "Mr. Nobody," then you should: http://www.imdb.com/title/tt0485947/. It's on Netflix`)
     } {
-
+        //Call API once user enter search
         axios.get(`http://www.omdbapi.com/?t=${userSearch}&y=&plot=short&apikey=trilogy`)
             .then(function (response) {
                 console.log(`Title: ${response.data.Title}`)
@@ -68,6 +71,16 @@ function songInfo() {
         }
     });
 }
+
+//Function for do what it says
+function doWhatitSays(){
+    fs.readFile('random.txt', 'utf8', function (err, data){
+        if(err){
+            return console.log(err)
+        } console.log(data)
+    })
+}
+
 //Function to run userInput when enter specific userSelect
 function userInput(userSelect, userSearch) {
     if (userSelect === "movie-this") {
@@ -76,9 +89,11 @@ function userInput(userSelect, userSearch) {
         concertInfo(userSearch);
     } if (userSelect === "spotify-this-song") {
         songInfo(userSearch);
-    }
+    } if (userSelect === "do-what-it-says"){
+        doWhatitSays(userSearch);
+    } 
 };
-//Call Userinput 
+//Call userInput 
 userInput(userSelect, userSearch)
 
 
