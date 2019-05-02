@@ -53,29 +53,34 @@ function concertInfo(userSearch) {
 
 //Function for Spotify
 function songInfo() {
-    spotify.search({ type: 'track', query: userSearch }, function (err, data) {
-        if (err) {
-            console.log('Error occurred: ' + err);
-            return;
-        }
-        // Do something with 'data'
-        var songs = data.tracks.items;
-        for (var i = 0; i < songs.length; i++) {
-            console.log('--------------------')
-            console.log('')
-            console.log(`Artist(s): ${songs[i].artists[0].name}`)
-            console.log(`Name: ${songs[i].name}`)
-            console.log(`Preview song: ${songs[i].preview_url}`)
-            console.log(`Album: ${songs[i].album.name}`)
-            console.log('')
-        }
-    });
+    //If user does not enter any info
+    if (userSearch === undefined) {
+        userSearch = "The Sign"
+    }
+    {
+        spotify.search({ type: 'track', query: userSearch }, function (err, data) {
+            if (err) {
+                console.log('Error occurred: ' + err);
+                return;
+            }
+            // Do something with 'data'
+            var songs = data.tracks.items;
+            for (var i = 0; i < songs.length; i++) {
+                console.log('--------------------')
+                console.log('')
+                console.log(`Artist(s): ${songs[i].artists[0].name}`)
+                console.log(`Name: ${songs[i].name}`)
+                console.log(`Preview song: ${songs[i].preview_url}`)
+                console.log(`Album: ${songs[i].album.name}`)
+                console.log('')
+            }
+        });
+    }
 }
-
 //Function for do what it says
-function doWhatitSays(){
-    fs.readFile('random.txt', 'utf8', function (err, data){
-        if(err){
+function doWhatitSays() {
+    fs.readFile('random.txt', 'utf8', function (err, data) {
+        if (err) {
             return console.log(err)
         } console.log(data)
     })
@@ -89,9 +94,9 @@ function userInput(userSelect, userSearch) {
         concertInfo(userSearch);
     } if (userSelect === "spotify-this-song") {
         songInfo(userSearch);
-    } if (userSelect === "do-what-it-says"){
+    } if (userSelect === "do-what-it-says") {
         doWhatitSays(userSearch);
-    } 
+    }
 };
 //Call userInput 
 userInput(userSelect, userSearch)
