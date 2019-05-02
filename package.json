@@ -16,5 +16,14 @@
   "bugs": {
     "url": "https://github.com/cuongle30/liri-node-app/issues"
   },
-  "homepage": "https://github.com/cuongle30/liri-node-app#readme"
+  "homepage": "https://github.com/cuongle30/liri-node-app#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "bandsintown-events": "^1.0.4",
+    "dotenv": "^7.0.0",
+    "moment": "^2.24.0",
+    "node-spotify-api": "^1.1.1",
+    "omdb": "^0.8.0",
+    "spotify": "^0.3.0"
+  }
 }
