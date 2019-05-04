@@ -22,7 +22,7 @@ demo: https://drive.google.com/file/d/1JBr1reLN9Nqd-E4weDopatQQVOi5Q1Me/view
 •	The album that the song is from
 If no song is provided then your program will default.
   
-**node liri.js movie-this '<movie name here>'**
+**node liri.js movie-this <movie name here>**
   This will output the following information to your terminal/bash window:
 •	Title of the movie.
 •	Year the movie came out.
@@ -35,5 +35,5 @@ If no song is provided then your program will default.
   If the user doesn't type a movie in, the program will output default data.
   
 **node liri.js do-what-it-says**
-•	run command that is current stored in file.
+  run command that is current stored in file.
 
