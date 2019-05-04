@@ -55,7 +55,7 @@ function concertInfo(userSearch) {
 function songInfo() {
     //If user does not enter any info
     if (userSearch === undefined) {
-        userSearch = "The Sign"
+        userSearch = "The Sign - Ace of Base"
     }
     {
         spotify.search({ type: 'track', query: userSearch }, function (err, data) {
@@ -82,7 +82,19 @@ function doWhatitSays() {
     fs.readFile('random.txt', 'utf8', function (err, data) {
         if (err) {
             return console.log(err)
-        } console.log(data)
+        } 
+        var userInput = data.split(',')
+        var command = userInput[0]
+        var input = userInput[1]
+        if(command === "spotify-this-song"){
+            songInfo(input)
+        } if (command === "concert-this"){
+            concertInfo(input)
+            if (command === "movie-this"){
+                movieInfo(input)
+            }
+        }  
+        console.log(data)
     })
 }
 
